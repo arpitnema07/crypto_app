@@ -375,3 +375,15 @@ a:hover {
   padding: 20px;
   align-items: center;
 }
+
+.login-form {
+  margin: 50px auto;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+.login-heading {
+  margin: 30px;
+  text-align: center;
+  font-weight: 600;
+}

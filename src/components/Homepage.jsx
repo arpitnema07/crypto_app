@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import millify from "millify";
-import { Typography, Row, Col, Statistic } from "antd";
+import { Typography, Row, Col, Statistic, Alert } from "antd";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import Loader from "./Loader";
@@ -11,11 +11,26 @@ const Homepage = () => {
   const { data, isFetching } = useGetCryptosQuery(10);
 
   const globalStats = data?.data?.stats;
+  // const user = localStorage.getItem("user");
+  // const [alert, setAlert] = useState({
+  //   type: "",
+  //   message: "",
+  // });
+
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     setAlert({
+  //       type: "success",
+  //       message: "Login Successful",
+  //     });
+  //   }
+  // }, [user]);
 
   if (isFetching) return <Loader />;
 
   return (
     <>
+      {/* <Alert type={alert.type} message={alert.message} setTimeout={3000} /> */}
       <Title level={2} className="heading">
         Global Crypto Stats
       </Title>

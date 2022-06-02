@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import { Layout, Typography, Space } from "antd";
@@ -9,9 +9,23 @@ import {
   Cryptocurrencies,
   CryptoDetails,
   News,
+  Register,
+  Login,
 } from "./components";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
+
+  const user = localStorage.getItem("user");
+  useEffect(() => {
+    if (user === null) {
+      if ("http://localhost:3000/register" !== window.location.href) {
+        navigate("/");
+      }
+    }
+  }, [navigate, user]);
+
   return (
     <div className="app">
       <div className="navbar">
@@ -21,7 +35,10 @@ function App() {
         <Layout>
           <div className="routes">
             <Routes>
-              <Route exact path="/" element={<Homepage />} />
+              <Route exact path="/" element={<Login />} />
+              <Route exact path="/home" element={<Homepage />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/register" element={<Register />} />
               <Route exact path="/exchanges" element={<Exchanges />} />
               <Route
                 exact
@@ -38,11 +55,11 @@ function App() {
             level={5}
             style={{ color: "white", textAlign: "center" }}
           >
-            Crypto App <br />
+            CryptoPedia <br />
             <li>All rights reserved</li>
           </Typography.Title>
           <Space>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
             <Link to="/cryptocurrencies">Cryptocurrencies</Link>
             <Link to="/news">News</Link>
           </Space>
